@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "prebuild": "node scripts/generate-meta.mjs",
+    "dev": "next dev -p 4545",
+    "predev": "node scripts/generate-meta.mjs",
     "start": "next start",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:meta": "node scripts/generate-meta.mjs"
   },
   "dependencies": {
     "fumadocs-core": "16.2.5",

@@ -1,10 +1,19 @@
-import { source } from '@/lib/source';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
-import { baseOptions } from '@/lib/layout.shared';
+import { source } from "@/lib/source";
+import { DocsLayout } from "fumadocs-ui/layouts/docs";
+import { baseOptions } from "@/lib/layout.shared";
+import { generateDocsTabs } from "@/lib/tabs";
 
-export default function Layout({ children }: LayoutProps<'/docs'>) {
+const tabs = generateDocsTabs();
+
+export default function Layout({ children }: LayoutProps<"/docs">) {
   return (
-    <DocsLayout tree={source.pageTree} {...baseOptions()}>
+    <DocsLayout
+      tree={source.pageTree}
+      {...baseOptions()}
+      sidebar={{
+        tabs,
+      }}
+    >
       {children}
     </DocsLayout>
   );
