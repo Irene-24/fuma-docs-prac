@@ -1,4 +1,12 @@
 import { createMDX } from "fumadocs-mdx/next";
+import { detectLatestVersionNumber } from "./lib/versioning.mjs";
+
+const latestFromFS = detectLatestVersionNumber(
+  path.join(process.cwd(), "content", "docs"),
+);
+const envVersion = Number(process.env.NEXT_PUBLIC_LATEST_VERSION);
+const LATEST_VERSION =
+  latestFromFS ?? (Number.isFinite(envVersion) ? envVersion : 1);
 
 const withMDX = createMDX();
 
@@ -10,11 +18,11 @@ const config = {
     return [
       {
         source: "/docs",
-        destination: `/docs/v${process.env.NEXT_PUBLIC_LATEST_VERSION}`,
+        destination: `/docs/v${LATEST_VERSION}`,
       },
       {
         source: "/docs/",
-        destination: `/docs/v${process.env.NEXT_PUBLIC_LATEST_VERSION}`,
+        destination: `/docs/v${LATEST_VERSION}`,
       },
     ];
   },
