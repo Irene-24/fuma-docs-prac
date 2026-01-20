@@ -1,5 +1,6 @@
 import { createMDX } from "fumadocs-mdx/next";
 import { detectLatestVersionNumber } from "./lib/versioning.mjs";
+import path from "node:path";
 
 const latestFromFS = detectLatestVersionNumber(
   path.join(process.cwd(), "content", "docs"),
@@ -13,6 +14,7 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  output: "export",
 
   async rewrites() {
     return [
